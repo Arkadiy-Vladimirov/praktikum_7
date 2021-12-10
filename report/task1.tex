@@ -34,19 +34,81 @@
 
         Программа, по описанной выше схеме моделирующая $\mathrm{Bin}(16,0.5)$, 
         дает следующий результат (рис. \ref{task1_bin}).
-        \newpage
-        \begin{figure}[h]
-            \centering
-            \includegraphics[width=0.4\textwidth]{resources/task1_bin.png}
-            \caption{Биномиальное распределение (размер выборки~--- $1000$)}
-            \label{task1_bin}
-        \end{figure}
-
+        
     \subsection{Геометрическое распределение}
         Случайная величина $\gamma \sim \mathrm{Geom}(p)$ представима как 
-        $\gamma = \min\{i \in \mathbb{N} : \xi_i = 1\}.$
-        \bigskip
+        \[\gamma = \max\{n \in \mathbb{N} \cup \{0\} : 
+        \xi_i = 0,\:i = 1,\ldots,n\}.\]
 
-        Геометрическое распределение обладает свойством отсутствия памяти, т.е.\\
-        $\mathbb{P}(\gamma > m + n \mid \gamma \ge m) = \mathbb{P}(\gamma > n), 
-        \forall{m,n} \in \mathbb{N} \cup \{0\}.$
+        Геометрическое распределение обладает свойством отсутствия памяти, т.е.
+
+        \[\mathbb{P}(\gamma > m + n \mid \gamma \ge m) = \mathbb{P}(\gamma > n), 
+        \quad\forall{m,n} \in \mathbb{N} \cup \{0\}.\]
+
+        Это свойство можно переформулировать. Пусть 
+        $\gamma~\sim~\mathrm{Geom}(p)$~--- случайная величина, определенная на 
+        вероятностном пространстве $\left(\Omega,\mathcal{A},\mathbb{P}\right)$.
+        Свойство отсутствия памяти сл. в. $\gamma$ означает, что
+        \smallskip
+
+        \[\bigl. \gamma_m \sim \gamma ,\quad 
+        \forall{m} \in \mathbb{N} \cup \{0\},\]
+        где $\gamma_m := (\gamma \bigr|_{\Omega_m} - m), 
+        \quad \Omega_m = \gamma^{-1}(\gamma \geqslant m) \in \mathcal{A}.$ 
+
+        То есть для каждого $m$ распределение случайной величины $\gamma$ 
+        отличается ровно на константу $m$ от распределения сл.в. $\gamma$, 
+        индуцированной на вероятностное подпространство $\Omega_m$.
+
+        Проверка свойства отсутствия памяти проведена численным моделированием 
+        распределений сл.в. $\gamma$ и $\gamma_m$ (рис. \ref{task1_memo}).
+        
+        \begin{figure}[tbp]
+            \centering
+            \begin{subfigure}[b]{0.4\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{resources/task1_bin.png}
+                \caption{Биномиальное распределение}
+                \label{task1_bin}
+            \end{subfigure}
+            \hfill
+            \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{resources/task1_memo.png}
+                \caption{Отсутствие памяти ($m = 5$)}
+                \label{task1_memo}
+            \end{subfigure}
+            \caption{}
+        \end{figure}
+
+
+    \subsection{Игра в орлянку}
+        Даны $n$ н.о.р.с.в.
+
+        \[\theta_j: \mathbb{P}(\theta_j = 1 ) = \mathbb{P}(\theta_j = -1) 
+                                          = \frac{1}{2}, \quad j = 1,\ldots,n.\]
+
+        Рассматривается нормированная сумма
+
+        \[Y(i) = \frac{S_i}{\sqrt{n}},\quad \text{где } 
+                                       S_i = \sum\limits_{j = 1}^{n} \theta_j,\]
+
+        пример поведения которой проиллюстрирован на рис. \ref{task1_toss}.
+                                
+
+        Оценим $Y(n)$ при $n \rightarrow \infty$:
+        
+        \[\lim_{n \rightarrow \infty}\Exp{Y(n)} = 
+          \lim_{n \rightarrow \infty}\Exp{\frac{S_i}{\sqrt{n}}} = 
+          \lim_{n \rightarrow \infty}\Exp{\frac{\sum_{j = 1}^{n} \theta_j}{\sqrt{n}}} =
+          \lim_{n \rightarrow \infty}\frac{1}{\sqrt{n}}\sum_{j = 1}^{n} \Exp{\theta_j} =
+          \lim_{n \rightarrow \infty}\frac{1}{\sqrt{n}}\cdot 0 = 
+          0.
+        \]
+        
+        \begin{figure}[ht]
+            \centering
+            \includegraphics[width=0.5\textwidth]{resources/task1_toss.png}
+            \caption{Игра в орлянку ($n = 1000$)}
+            \label{task1_toss}
+        \end{figure}
