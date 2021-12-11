@@ -22,7 +22,7 @@
         Чтобы практически реализовать схему Бернулли нужно получить н.о.р.с.в.\\ 
         $\xi_i \sim \mathrm{Bern}(p), i = 1,\dots,n$. Для этого достаточно 
         выразить $\xi_i$ через $\eta$ следующим образом: $\xi_i = 
-        \mathbb{I}(\eta < p) + \mathbb{I}(\eta \ge p)$, т.е.
+        \Ind{\eta < p} + \Ind{\eta \ge p}$, т.е.
 
         \[\xi_i = \left\{\begin{aligned}
                             1,&\quad \eta < p,\\
@@ -94,21 +94,28 @@
                                        S_i = \sum\limits_{j = 1}^{n} \theta_j,\]
 
         пример поведения которой проиллюстрирован на рис. \ref{task1_toss}.
-                                
 
-        Оценим $Y(n)$ при $n \rightarrow \infty$:
-        
-        \[\lim_{n \rightarrow \infty}\Exp{Y(n)} = 
-          \lim_{n \rightarrow \infty}\Exp{\frac{S_i}{\sqrt{n}}} = 
-          \lim_{n \rightarrow \infty}\Exp{\frac{\sum_{j = 1}^{n} \theta_j}{\sqrt{n}}} =
-          \lim_{n \rightarrow \infty}\frac{1}{\sqrt{n}}\sum_{j = 1}^{n} \Exp{\theta_j} =
-          \lim_{n \rightarrow \infty}\frac{1}{\sqrt{n}}\cdot 0 = 
-          0.
-        \]
-        
-        \begin{figure}[ht]
+        \bigskip
+
+        \begin{figure}[tbp]
             \centering
             \includegraphics[width=0.5\textwidth]{resources/task1_toss.png}
             \caption{Игра в орлянку ($n = 1000$)}
             \label{task1_toss}
         \end{figure}
+
+        Для оценки $Y(n)$ при $n \rightarrow \infty$, нам потребуется следующая
+        \begin{theorem}[Центральная предельная теорема]
+            Пусть $\xi_1, \xi_2, \ldots$~--- последовательность независимых 
+            одинаково распределенных (невырожденных) случайных величин с 
+            $\Exp{\xi_1^2} \le \infty$ и $S_n = \xi_1 + \ldots + \xi_n$. Тогда
+            \[\frac{S_n - \Exp{S_n}}{\sqrt{\Disp{S_n}}} 
+            \stackrel{d}{\longrightarrow} \mathrm{Norm}(0,1).\]   
+        \end{theorem}
+
+        Действительно
+
+        \[\frac{S_n - \Exp{S_n}}{\sqrt{\Disp{S_n}}} = 
+        \frac{S_n - 0}{\sqrt{n\Disp{\theta_1)}}} = \frac{S_n}{\sqrt{n}} = Y(n) 
+        \stackrel{d}{\longrightarrow} \mathrm{Norm}(0,1).\]
+        

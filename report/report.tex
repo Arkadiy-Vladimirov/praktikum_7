@@ -10,18 +10,25 @@
 \usepackage{caption}
 \usepackage{subcaption}
 
-\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
 
 \geometry{a4paper}
 \sloppy
 
+\newtheorem*{theorem}{Теорема}
+
 \renewcommand{\le}{\leqslant}
 \renewcommand{\ge}{\geqslant}
+\renewcommand{\phi}{\varphi}
 
-\newcommand*\segm[2]{[#1,#2]}
+\newcommand*\segm[2]{\left[#1,#2\right]}
 \newcommand*\inter[2]{(#1,#2)}
 
+\newcommand*\Ind[1]{\mathbb{I}\left(#1\right)}
+\newcommand*\Prb[1]{\mathbb{P}\left(#1\right)}
+
 \DeclareMathOperator{\Exp}{\mathbb{E}}
+\DeclareMathOperator{\Disp}{\mathbb{D}}
 
 \begin{document}
 
@@ -32,7 +39,9 @@
 \tableofcontents
 \newpage
 
-\include{task1}
-\include{task2}
+\input{task1}
+\input{task2}
+
+\include{bibliography}
 
 \end{document}
