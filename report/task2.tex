@@ -43,9 +43,9 @@
 
         Статистикой критерия Колмогорова является величина 
         \[\sqrt{n}D_n = \sup\limits_{-\infty < x < \infty} 
-                                                    \abs{\hat F_n(x) - F(x)},\]
-        где $\hat F_n(x) = \dfrac{1}{n}\sum\limits_{i=1}^{n} \Ind{X_i \le x}$~---
-        эмпирическая функция распределения.
+                                                \abs{\widehat F_n(x) - F(x)},\]
+        где $\widehat F_n(x) = \dfrac{1}{n}\sum\limits_{i=1}^{n} 
+        \Ind{X_i \le x}$~--- эмпирическая функция распределения.
 
         \begin{theorem}[Колмогоров] Если функция распределения элементов выборки 
             $F(x)$ непрерывна, то для $x > 0$
@@ -95,11 +95,93 @@
         \[D_n(x_1,\ldots,x_n) = \max\limits_{1\le i \le n}
         \left\{\dfrac{1}{n} - F(x_{(i)}),\: F(x_{(i)}) - \dfrac{i-1}{n}\right\}.\]
 
-        Посчитанная таким образом на некотрой выборке $(X_1,\ldots,X_n)$ значений датчика 
-        $\delta$ статистика $D_n$ составляет приблизительно $0.0087$. Величина 
-        $1-K(\sqrt{n}D_n) = \alpha(X)$ равно приблизительно $0.9999$, что даёт 
-        нам основания принять гипотезу о корректности построенного датчика 
-        $\delta$, с уровнем значимоcти, например, 20\%.
+        Посчитанная таким образом на некотрой выборке $(X_1,\ldots,X_n)$ 
+        значений датчика $\delta$ статистика $D_n$ составляет приблизительно 
+        $0.0087$. Величина $1-K(\sqrt{n}D_n) = \alpha(X)$ равно приблизительно 
+        $0.9999$, что даёт нам основания принять гипотезу о корректности 
+        построенного датчика $\delta$, с уровнем значимоcти, например, 20\%.
 
     \subsection{Свойства симметричности и самоподобия}
-    
+        Для проверки требуемых свойств необходимо к двум сгенерированным 
+        выборкам $(X_1,\ldots,X_n),\; (Y_1,\ldots,Y_m)$ применить критерий 
+        Смирнова, статистикой которого служит величина 
+        \begin{gather*}
+            D_{n,m} = \sup\limits_{x}\abs{\widehat F_n(x) - \widehat G_n(x)},\\
+            \text{где } \widehat F_n(x) = \dfrac{1}{n}\sum\limits_{i=1}^{n} \Ind{X_i \le x},\quad
+                        \widehat G_n(x) = \dfrac{1}{m}\sum\limits_{j=1}^{m} \Ind{Y_i \le x}.
+        \end{gather*}
+
+        Известен следующий результат
+        \begin{theorem}[Смирнов] Если гипотеза однородонсти верна (подробнее см. 
+            \cite{NMS}), то имеет место сходимость
+            \[\Prb{\sqrt{nm/(n+m)} D_{n,m} \le x} \rightarrow K(x) 
+                                            \text{при } n,m \rightarrow \infty,\]  
+            где $K(x)$~--- функция распределения Колмогорова.
+        \end{theorem}
+
+        Для нахождения статистики достаточно произвести вычисления по формулам
+        \begin{gather*}
+            D_{n,m} = \max\{D_{n,m}^+,D_{n,m}^-\},\\
+            \text{где}\\
+            D_{n,m}^+ = \sup\limits_{x} \left( \widehat F_n(x) - \widehat G_n(x) \right)
+            = \max\limits_{1 \le i \le n} \left\{ \dfrac{i}{n} - \widehat G_n(X_{(i)}) \right\}\\
+            D_{n,m}^- = \sup\limits_{x} \left( \widehat G_n(x) - \widehat F_n(x) \right)
+            = \max\limits_{1 \le j \le m} \left\{ \dfrac{j}{m} - \widehat F_n(Y_{(j)}) \right\}. 
+        \end{gather*}
+
+        В результате компьютерных вычислений для случайных величин 
+        $\delta$ и $1 - \delta$ получены значения $D_{n,m} \approx 0.489$ 
+        и $1 - K(\sqrt{nm/(n+m)} D_{n,m}) \approx 0.1811$, что позволяет принять
+        гипотезу об одиноковой распределенности на уровне значимости 10\%.
+
+        Соответствующие результаты для $\delta/3$ и $\delta\bigr|_{\segm{0}{3}}$
+        составляют приблизительно $0.3482$ и $0.1427$ соответственно, что 
+        подтверждает свойство самоподобия на уровне значимости 10\%.
+
+    \subsection{Математическое ожидание и диспесия}
+        Случайная величина $\delta$ обладает свойством самоподобия, т.е. для ее 
+        функции распределения $F(\cdot)$ выполнено: 
+        \begin{itemize}
+            \item $F(x) = \dfrac{F(3x)}{2},\; \text{при } \dfrac{2}{3} < x < 1,$
+            \item $F(x) = \dfrac{1}{2} + \dfrac{F(3x-2)}{2},\; \text{при } \dfrac{2}{3} < x < 1.$
+        \end{itemize}
+        Используя это свойство вычислим математическое ожидание
+        \begin{multline*}
+        \Exp{\delta} = \int\limits_{-\infty}^{+\infty} x \,dF(x) = 
+            \int\limits_{0}^{1/3} x \,dF(x) + \int\limits_{2/3}^{1} x \,dF(x) =
+            \dfrac{1}{2}\int\limits_{0}^{1/3} x \,dF(3x) + \\
+        + \dfrac{1}{2}\int\limits_{2/3}^{1} x \,d(1/2+F(3x-2)) = 
+            \dfrac{1}{2}\int\limits_{0}^{1} \dfrac{y}{3} \,dF(y) + 
+            \dfrac{1}{2}\int\limits_{0}^{1} \dfrac{y+2}{3} \,dF(y) = \\
+        \dfrac{1}{6}\int\limits_{0}^{1} y \,dF(y) + 
+            \dfrac{1}{6}\int\limits_{0}^{1} y \,dF(y) + 
+            \dfrac{1}{3}\int\limits_{0}^{1} \,dF(y) = 
+        \dfrac{1}{3}\Exp{\delta} + \dfrac{1}{3}.
+        \end{multline*}
+        Следовательно 
+        \[ \Exp{\delta} = \frac{1}{2}. \]
+
+        Аналогично дисперсия:
+        \begin{multline*}
+        \Exp{\delta^2} = \int\limits_{0}^{1/3} x^2 \,dF(x) + 
+            \int\limits_{2/3}^{1} x^2 \,dF(x) = 
+                \dfrac{1}{2}\int\limits_{0}^{1} \left(\dfrac{y}{3}\right)^2 \,dF(y) + \\
+            + \dfrac{1}{2}\int\limits_{0}^{1} \left(\dfrac{y+2}{3}\right)^2 \,dF(y) = 
+                \dfrac{1}{9}\Exp{\delta^2} + \dfrac{2}{9}\Exp{\delta} + \dfrac{2}{9} = 
+                \dfrac{1}{9}\Exp{\delta^2} + \dfrac{1}{3}.
+        \end{multline*}
+        Т.е.
+        \[\Exp{\delta^2} = \dfrac{3}{8},\]
+        и
+        \[\Disp{\delta} = \Exp{(\delta - \Exp{\delta})^2} = 
+        \Exp{\delta^2} - (\Exp{\delta})^2 = \dfrac{3}{8} - \dfrac{1}{4} = \frac{1}{8}\]
+        
+        Сходимость эмпирических показателей к теоретическим показана на рис. 
+        \ref{task2_meanvar}.
+
+        \begin{figure}[tbp]
+            \centering
+            \includegraphics[width=1.0\textwidth]{resources/task2_meanvar.png}
+            \caption{}
+            \label{task2_meanvar}
+        \end{figure}

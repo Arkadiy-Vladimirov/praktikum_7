@@ -1,0 +1,91 @@
+\section{Задание 3}
+
+\begin{enumerate}
+	\item Построить датчик экспоненциального распределения. Проверить для 
+    данного распределения свойство отсутствия памяти. Пусть 
+    $X_1,X_2,\dots,X_n$~--- независимые экспоненциально распределенные с.в. с 
+    параметрами $\lambda_1, \lambda_2, \dots, \lambda_n$ соответственно. Найти 
+    распределение случайной величины $Y = \min(X_1, X_2, \dots, X_n)$.
+	\item На основе датчика экспоненциального распределения построить датчик 
+    пуассоновского распределения.
+	\item Построить датчик пуассоновского распределения как предел биномиального
+     распределения. С помощью критерия хи-квадрат Пирсона убедиться, что получен
+     датчик распределения Пуассона.
+	\item Построить датчик стандартного нормального распределения методом 
+    моделирования случайных величин парами с переходом в полярные координаты. 
+    Проверить при помощи $t$-критерия Стьюдента равенство математических 
+    ожиданий, а при помощи критерия Фишера равенство дисперсий.  
+\end{enumerate}
+
+\subsection{Экспоненциальное распределение}
+    Напомним, что $\eta \sim \mathrm{Uni}\inter{0}{1}$, тогда для $\epsilon \sim
+    \mathrm{Exp}(\lambda)$ справделиво 
+    \footnote{см. \cite{NMS} гл. 4 \S 1 ``Метод обратной функции''.} 
+    \[\epsilon \sim -\frac{1}{\lambda} \ln\eta.\]
+    Результат моделирования см. рис. \ref{task3_exp}
+
+    Экспоненциальное распределение обладает свойством отсутствия памяти 
+    (рис. \ref{task3_memoexp}), т.е. аналогично \S\,\ref{par12}:
+    \[\bigl. \epsilon_m \sim \epsilon ,\quad \forall{m} \in \mathbb{N} \cup \{0\},\]
+    где $\epsilon_m := (\gamma \bigr|_{\Omega_m} - m),\: 
+    \Omega_m = \epsilon^{-1}(\epsilon \geqslant m) \in \mathcal{A}.$ 
+    \bigskip
+
+    \begin{figure}[tbp]
+        \centering
+        \begin{subfigure}[b]{0.4\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{resources/task3_exp.png}
+            \caption{Экспоненциальное распределение}
+            \label{task3_exp}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{resources/task3_memoexp.png}
+            \caption{Отсутствие памяти ($m = 2$)}
+            \label{task3_memoexp}
+        \end{subfigure}
+        \caption{}
+    \end{figure}
+
+    Распределение сл.в. $Y = \min(X_1,X_2,\ldots X_n)$ имеет функцию 
+    распределения 
+    \begin{multline*}
+        F(y) = \Prb{Y < y} = 1 - \Prb{Y \ge 1} = 
+        1 - \Prb{\min(X_1,X_2,\ldots X_n) \ge 1} = \\
+        1 - \Prb{X_1 \ge y, \ldots, X_n \ge y} = 
+        \text{\{в силу независимости сл.в. $X_i$\} } = 
+        1 - \prod_{i=1}^{n} \Prb{X_i \ge y} = \\
+        1 - \prod_{i=1}^{n} (1 - F_{Exp(\lambda_i)}) = 
+        1 - \prod_{i=1}^{n} (1 - (1 - e^{-\lambda_i y})) =
+        1 - \prod_{i=1}^{n} e^{-\lambda_i y} = 
+        1 - e^{-(\sum_{i=1}^{n} \lambda_i) y}.
+    \end{multline*}
+    Таким образом
+    \[Y \sim \mathrm{Exp}(\sum_{i=1}^{n} \lambda_i)\]
+    Cравните результаты, посчитанные для обоих представлений $Y$ 
+    на рис. \ref{task3_minexp}.
+
+    \begin{figure}[tbp]
+        \centering
+        \includegraphics[width=0.7\textwidth]{resources/task3_minexp.png}
+        \caption{}
+        \label{task3_minexp}
+    \end{figure}
+
+\subsection{Датчик пуассоновского распределения 1}
+    Для $\pi \sim \mathrm{Pois}(\lambda)$ верно следующее представление
+    \footnote{см. \cite{NMS} гл. 5 \S 1 ``Моделирование дискретных величин''.}
+    \[\pi = \max_{\mathbb{N}\cup\{0\}}(n \mid S_n = \sum_{i=1}^{n} \epsilon_i \le 1),\]
+    где $\epsilon_1,\epsilon_2,\ldots$~--- пуассоновские с параметром $\lambda$ 
+    н.о.р.с.в. 
+
+    Результат моделировния см. \ref{task3_pois1}
+
+    \begin{figure}[tbp]
+        \centering
+        \includegraphics[width=0.5\textwidth]{resources/task3_pois1.png}
+        \caption{}
+        \label{task3_pois1}
+    \end{figure}
