@@ -78,7 +78,7 @@
     Для $\pi \sim \mathrm{Pois}(\lambda)$ верно следующее представление
     \footnote{см. \cite{NMS} гл. 5 \S 1 ``Моделирование дискретных величин''.}
     \[\pi = \max_{\mathbb{N}\cup\{0\}}(n \mid S_n = \sum_{i=1}^{n} \epsilon_i \le 1),\]
-    где $\epsilon_1,\epsilon_2,\ldots$~--- пуассоновские с параметром $\lambda$ 
+    где $\epsilon_1,\epsilon_2,\ldots$~--- экспоненциальные с параметром $\lambda$ 
     н.о.р.с.в. 
 
     Результат моделировния см. \ref{task3_pois1}
@@ -89,3 +89,35 @@
         \caption{}
         \label{task3_pois1}
     \end{figure}
+
+\subsection{Датчик пуассоновского распределения 2}
+    Известно, что распределение $\mathrm{Pois}(\lambda)$ получается из 
+    биномиального $\mathrm{Bin}(n,p)$ предельным переходом при $n\rightarrow 
+    \infty$, $p \rightarrow 0$, $np \rightarrow \lambda$. Результат моделирования 
+    распределения пуассона на основе этого приниципа предоставлен на рис. \ref{task3_pois2}.
+
+    Проверим корректность нашего датчика при помощи критерия хи-квадрат Пирсона.
+
+    Пусть $X_1,\ldots X_n$~--- выборка. Разобьем множество значений $\xi_1$ на 
+    $N$ промежутков (возможно, бесконечных) $\Delta_j = (a_j, b_j], 
+    j = 1,\ldots N.$ Положим $p_j = \Prb{X_1 \in \Delta_j}$, а случайные 
+    величины $\nu_j$~--- равными количеству элементов выборки в $\Delta_j$.
+
+    Так, статистикой критерия Пирсона служит величина 
+    \begin{equation}
+        X_n^2 = \sum\limits_{j=1}^N \dfrac{(\nu_j - n p_j)^2}{p_j},
+    \end{equation}
+    предел которой, при $n\rightarrow \infty$ имеет распределение $\chi_{N-1}^2$.
+
+    Промежутки $\Delta_j$ зададим как набор равновероятных интервалов на прямой, 
+    $N$ положим равным приблизительно $\log_2 n$.
+
+    \begin{figure}[tbp]
+        \centering
+        \includegraphics[width=0.5\textwidth]{resources/task3_pois2.png}
+        \caption{}
+        \label{task3_pois2}
+    \end{figure}
+
+\subsection{Датчик стандартного нормального распределения 1}
+
