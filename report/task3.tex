@@ -96,6 +96,13 @@
     \infty$, $p \rightarrow 0$, $np \rightarrow \lambda$. Результат моделирования 
     распределения пуассона на основе этого приниципа предоставлен на рис. \ref{task3_pois2}.
 
+    \begin{figure}[tbp]
+        \centering
+        \includegraphics[width=0.5\textwidth]{resources/task3_pois2.png}
+        \caption{}
+        \label{task3_pois2}
+    \end{figure}
+
     Проверим корректность нашего датчика при помощи критерия хи-квадрат Пирсона.
 
     Пусть $X_1,\ldots X_n$~--- выборка. Разобьем множество значений $\xi_1$ на 
@@ -109,15 +116,12 @@
     \end{equation}
     предел которой, при $n\rightarrow \infty$ имеет распределение $\chi_{N-1}^2$.
 
-    Промежутки $\Delta_j$ зададим как набор равновероятных интервалов на прямой, 
-    $N$ положим равным приблизительно $\log_2 n$.
-
-    \begin{figure}[tbp]
-        \centering
-        \includegraphics[width=0.5\textwidth]{resources/task3_pois2.png}
-        \caption{}
-        \label{task3_pois2}
-    \end{figure}
+    Поскольку распределение Пуассона дискретно, промежутки $\Delta_j$ зададим 
+    как $\Delta_j = \{j-1\}, j = 1,\ldots, N-1;\quad 
+    \Delta_N = \{j\in \mathbb{N}: j > N-1\}$. $N$ положим равным приблизительно 
+    $\log_2 n$. Теперь вычислим соответствующие частоты, вероятности и 
+    статистику. По результатам вычислений гипотеза о корректности принимается с 
+    уровнем значимости 5\%.
 
 \subsection{Датчик стандартного нормального распределения 1}
 
