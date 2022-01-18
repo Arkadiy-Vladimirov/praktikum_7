@@ -124,4 +124,22 @@
     уровнем значимости 5\%.
 
 \subsection{Датчик стандартного нормального распределения 1}
+    С помощью нелинейного преобразования пары н.о.р.с.в. $\eta_1, \eta_2 \sim 
+    \mathrm{U}\segm{0}{1}$ можно получить две н.о.р.с.в. $X,Y \sim \mathcal{N}(0,1)$:
+    \begin{gather*}
+        X = -\sqrt{-2\ln\eta_1}\cos(2\pi\eta_2),\\  
+        Y = -\sqrt{-2\ln\eta_1}\sin(2\pi\eta_2). 
+    \end{gather*}
+    Результат cмоделированной таким способом стандартной нормальной случайной 
+    величины см. \ref{task3_norm}.
 
+    \begin{figure}[tbp]
+        \centering
+        \includegraphics[width=0.5\textwidth]{resources/task3_norm.png}
+        \caption{}
+        \label{task3_norm}
+    \end{figure}
+
+
+    Для проверки однородности двух независимых нормальных выборок (в нашем 
+    случае это $X$ и $Y$) используют критерии Фишера и Стьюдента.
