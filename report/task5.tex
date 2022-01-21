@@ -1,7 +1,7 @@
 \section{Задание 5}
 
 \begin{enumerate}
-	\item Пусть $X_i \sim N(\mu, \sigma^2)$. Убедиться эмпирически в 
+	\item Пусть $X_i \sim \mathcal{N}(\mu, \sigma^2)$. Убедиться эмпирически в 
 	справедливости ЗБЧ и ЦПТ, т.е. исследовать поведение суммы $S_n$ и 
 	эмпирического распределения величины
 	\begin{equation*}
@@ -15,7 +15,40 @@
 \end{enumerate}
 
 \subsection{Проверка ЗБЧ и ЦПТ}
+	Действительно, для выборки $\{X_i\} \sim \mathcal{N}(\mu,\sigma^2)$ значение 
+	$\dfrac{S_n}{n} = \dfrac{\sum_{i=1}^n X_i}{n}$ ведет себя в соответствии с 
+	законом больших чисел (см. рис. \ref{LLN}), т.е
+	\begin{equation*}
+		\frac{S_n}{n} \rightarrow \mu \text{, при } n \rightarrow \infty.
+	\end{equation*}
 
+	Результаты опыта соответствуют и центральной пределной теореме, т.е
+	\begin{equation*}
+		\frac{S_n - \mu n}{\sigma \sqrt{n}} \xrightarrow{d} \eta \sim 
+		\mathcal{N}(0,1) \text{ as } n \rightarrow \infty. 
+		\text{ (см. рис. \ref{CLT})}
+	\end{equation*}
+
+	\begin{figure}[tbp]
+        \centering
+        \begin{subfigure}[b]{0.45\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{resources/task5_LLN.png}
+            \caption{ЗБЧ ($\mu = -2,\:\sigma^2 = 0.5$)}
+            \label{LLN}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{resources/task5_CLT.png}
+            \caption{ЦПТ ($\mu = -2,\:\sigma^2 = 0.5$)}
+            \label{CLT}
+        \end{subfigure}
+        \caption{}
+    \end{figure}
+	
 \subsection{Доверительные интервалы}
+
+
 
 \subsection{Поведение сумм $S_n/n$ для распределения Коши}
