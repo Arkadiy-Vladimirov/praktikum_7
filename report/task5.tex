@@ -48,7 +48,49 @@
     \end{figure}
 	
 \subsection{Доверительные интервалы}
+	Пусть имеется выборка $X_i \sim \mathcal{N}(\mu, \sigma^2)$, где $\mu$ и 
+	$\sigma^2$~--- неизвестны. Исходя из
+	\begin{theorem} Для нормальной выборки $X_i \sim \mathcal{N}(\mu, \sigma^2)$
+	выборочное среднее $\overline X = \frac{1}{n}\sum X_i$ и выборочная 
+	дисперсия $S^2 = \frac{1}{n}\sum (X_i-\overline X)^2$ независимы, причем 
+	$nS^2/\sigma^2 \sim \chi_{n-1}^2$, а $\sqrt{n-1}(\overline X - \mu)/S 
+	\sim t_{n-1}$.
+	\end{theorem}
+	можно построить доверительные интервалы 
+	\begin{itemize}
+		\item для параметра сдвига $\mu$:
+		\[\Prb{\overline X - \frac{y_{1-\alpha/2}S}{\sqrt{n-1}} < \mu < 
+		\overline X - \frac{y_{\alpha/2}S}{\sqrt{n-1}}} = 
+		\Prb{y_{\alpha/2} < \frac{\sqrt{n-1}(\overline X - \mu)}{S} < 
+		y_{1-\alpha/2}} = 1-\alpha,\]
+		где $y_p$~--- $p$-квантиль распределения Стьюдента $t_{n-1}$ (в силу 
+		симметрия закона $y_{\alpha/2} = -y_{1-\alpha/2}$);
+		\item и для параметра масштаба $\sigma$:
+		\[\Prb{\frac{\sqrt{n}S}{\sqrt{z_{1-\alpha/2}}} < \sigma < 
+		\frac{\sqrt{n}S}{\sqrt{z_{\alpha/2}}}} = \Prb{z_{\alpha/2} < 
+		\frac{nS^2}{\sigma^2} < z_{1-\alpha/2}} = 1-\alpha,\]
+		где $z_p$~--- $p$-квантиль закона $\chi_{n-1}^2$.
+	\end{itemize}
 
+	Доверительные интервалы для некотрой выборки из $\mathcal{N}(-2,0.5)$ для 
+	разных $n$ приведены на рис. \ref{CI}	
 
+	\begin{figure}[tbp]
+        \centering
+        \begin{subfigure}[b]{0.47\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{resources/task5_CI_mu.png}
+            \caption{}
+            \label{CI_mu}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.45\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{resources/task5_CI_sigma.png}
+            \caption{}
+            \label{CI_sigma}
+        \end{subfigure}
+        \caption{} \label{CI}
+    \end{figure}
 
 \subsection{Поведение сумм $S_n/n$ для распределения Коши}
