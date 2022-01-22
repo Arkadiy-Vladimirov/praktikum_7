@@ -2,9 +2,9 @@
 
 \begin{enumerate}
 	\item Посчитать интеграл
-	\begin{equation*}\label{integral}
+	\begin{equation}\label{integral}
 	\int\limits_{-\infty}^{\infty} \int\limits_{-\infty}^\infty \cdots \int\limits_{-\infty}^\infty \frac{e^{-\left(x_1^2 + \ldots + x_{10}^2 + \frac{1}{ 2^7\cdot x_1^2 \cdot \ldots \cdot x_{10}^2}\right)}}{x_1^2 \cdot \ldots \cdot x_{10}^2}\,dx_1 dx_2 \ldots dx_{10}
-	\end{equation*}
+	\end{equation}
 	\begin{itemize}
 		\item[---] методом Монте-Карло
 		\item[---] методом квадратур, сводя задачу к вычислению собственного интеграла Римана
@@ -13,5 +13,47 @@
 \end{enumerate}
 
 \subsection{Численное интегрирование}
+	Перепишем \eqref{integral} следующим образом
+	\begin{multline*}
+	\idotsint_{\mathbb{R}^{10}} \frac{e^{-\left(x_1^2 + \ldots + x_{10}^2 + 
+	\frac{1}{ 2^7\cdot x_1^2 \cdot \ldots \cdot x_{10}^2}\right)}}
+	{x_1^2 \cdot \ldots \cdot x_{10}^2}\,dx_1 dx_2 \ldots dx_{10} = \\
+	\idotsint_{\mathbb{R}^{10}} 
+	\frac{\pi^5 e^{-\frac{1}{ 2^7\cdot x_1^2 \cdot \ldots \cdot x_{10}^2}}}
+	{x_1^2 \cdot \ldots \cdot x_{10}^2} \cdot 
+	\frac{e^{-(x_1^2 + \ldots + x_{10}^2)}}{\pi^5}\,dx_1 dx_2\ldots dx_{10} = 
+	\idotsint_{\mathbb{R}^{10}} f(x) \cdot p(x)\,dx,
+	\end{multline*}
+	где $p(x)$~--- плотность многомерного нормального распределения 
+	$\mathcal{N}(0,\frac{1}{2} E)$,\\ $E\in \mathbb{R}^{10\times10}$. Таким образом
+	\begin{equation*}
+		\idotsint_{\mathbb{R}^{10}} f(x) \cdot p(x)\,dx = \Exp{f(\eta)}, \quad
+		\eta \sim \mathcal{N}(0,\frac{1}{2} E).
+	\end{equation*}
+
+	По усиленному закону больших чисел имеем
+	\begin{equation*}
+		\widehat I_n = \frac{1}{n}\sum\limits_{i=1}^{n} f(\eta_i) 
+		\xrightarrow[]{\text{п.н.}} \Exp f(\eta) =
+		\idotsint_{\mathbb{R}^{10}} f(x) \cdot p(x)\,dx = I,
+	\end{equation*}
+	что дает нам основания использовать метод Монте-Карло для вычисления 
+	интграла \eqref{integral}.
+
+	Другим споспобом вычисления может служить метод квадратур, для реализации 
+	которого проведем замену
+	\begin{equation*}
+		x_i = \tg (\tfrac{\pi}{2}t_i),\: t_i \in [0,1],\quad i = \overline{1,10}.
+	\end{equation*}
+	Тогда \eqref{integral} примет вид 
+	\begin{equation}\label{Rint}
+		I = \pi^{10} \idotsint_{[0,1]^{10}} \frac
+		{e^{-\biggl(\textstyle{ \sum\limits_{i=1}^{10} \tg (\frac{\pi}{2}t_i)^2 + 
+		\frac{1}{2^7 \prod_{i=1}^{10}\tg(\frac{\pi}{2}t_i)^2} }\biggr)}}
+		{\prod_{i=1}^{10}\tg(\frac{\pi}{2}t_i)^2 \cdot 
+		\prod_{i=1}^{10}\cos(\frac{\pi}{2}t_i)^2} \, dt.
+	\end{equation}
+	Интeграл \eqref{Rint} уже можно вычислить, например, стандартным методом 
+	прямоугольников на равномерной сетке.
 
 \subsection{Точность вычислений}
