@@ -17,13 +17,23 @@
     ожиданий, а при помощи критерия Фишера равенство дисперсий.  
 \end{enumerate}
 
-\subsection{Экспоненциальное распределение}
-    Напомним, что $\eta \sim \mathrm{Uni}\inter{0}{1}$, тогда для $\epsilon \sim
-    \mathrm{Exp}(\lambda)$ справделиво 
-    \footnote{см. \cite{NMS} гл. 4 \S 1 ``Метод обратной функции''.} 
-    \[\epsilon \sim -\frac{1}{\lambda} \ln\eta.\]
+\subsection{Экспоненциальное распределение} \label{exp_section}
+    Случайная величина $\epsilon$ имеет экспоненциальное распределение с 
+    параметром $\lambda$, если ее функция распределения имеет вид
+    \begin{equation}
+        F(x) = \left\{  \begin{aligned}
+            1 - e^{-\lambda x},&\quad x \ge 0,\\
+            0,&\quad x < 0.
+                        \end{aligned}\right.
+    \end{equation}
+    Мы будем моделировать $\epsilon \sim \mathrm{Exp}(\lambda)$ с помощью 
+    метода обратной функции
+    \footnote{см. \cite{NMS} гл. 4 \S 1 ``Метод обратной функции''.},
+    согласно которому 
+    \[\epsilon \sim -\frac{1}{\lambda} \ln\eta,\]
+    где $\eta \sim \mathrm{Uni}\inter{0}{1}$.
     Результат моделирования см. рис. \ref{task3_exp}
-
+    \newpage
     Экспоненциальное распределение обладает свойством отсутствия памяти 
     (рис. \ref{task3_memoexp}), т.е. аналогично \S\,\ref{par12}:
     \[\bigl. \epsilon_m \sim \epsilon ,\quad \forall{m} \in \mathbb{N} \cup \{0\},\]
@@ -36,7 +46,7 @@
         \begin{subfigure}[b]{0.4\textwidth}
             \centering
             \includegraphics[width=\textwidth]{resources/task3_exp.png}
-            \caption{Экспоненциальное распределение}
+            \caption{Э.ф.п. экспоненциального распределения}
             \label{task3_exp}
         \end{subfigure}
         \hfill
@@ -70,25 +80,20 @@
     \begin{figure}[tbp]
         \centering
         \includegraphics[width=0.7\textwidth]{resources/task3_minexp.png}
-        \caption{}
+        \caption{Э.ф.р. $\mathrm{Exp}(\lambda)$}
         \label{task3_minexp}
     \end{figure}
 
 \subsection{Датчик пуассоновского распределения 1}
+    Случайная величина $\pi$ имеет распределение Пуассона с параметром 
+    $\lambda > 0$, если $\Prb{\pi = k} = \dfrac{\lambda^k}{k!} e^{-\lambda}$.
     Для $\pi \sim \mathrm{Pois}(\lambda)$ верно следующее представление
     \footnote{см. \cite{NMS} гл. 5 \S 1 ``Моделирование дискретных величин''.}
     \[\pi = \max_{\mathbb{N}\cup\{0\}}(n \mid S_n = \sum_{i=1}^{n} \epsilon_i \le 1),\]
     где $\epsilon_1,\epsilon_2,\ldots$~--- экспоненциальные с параметром $\lambda$ 
     н.о.р.с.в. 
 
-    Результат моделировния см. \ref{task3_pois1}
-
-    \begin{figure}[tbp]
-        \centering
-        \includegraphics[width=0.5\textwidth]{resources/task3_pois1.png}
-        \caption{}
-        \label{task3_pois1}
-    \end{figure}
+    Результат моделировния см. рис. \ref{task3_pois1}
 
 \subsection{Датчик пуассоновского распределения 2}
     Известно, что распределение $\mathrm{Pois}(\lambda)$ получается из 
@@ -98,9 +103,20 @@
 
     \begin{figure}[tbp]
         \centering
-        \includegraphics[width=0.5\textwidth]{resources/task3_pois2.png}
-        \caption{}
-        \label{task3_pois2}
+        \begin{subfigure}[b]{0.48\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{resources/task3_pois1.png}
+            \caption{}
+            \label{task3_pois1}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.48\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{resources/task3_pois2.png}
+            \caption{}
+            \label{task3_pois2}
+        \end{subfigure}
+        \caption{Гистограммы датчиков распределения Пуассона}
     \end{figure}
 
     Проверим корректность нашего датчика при помощи критерия хи-квадрат Пирсона.
@@ -109,7 +125,8 @@
     $N$ промежутков (возможно, бесконечных) $\Delta_j = (a_j, b_j], 
     j = 1,\ldots N.$ Положим $p_j = \Prb{X_1 \in \Delta_j}$, а случайные 
     величины $\nu_j$~--- равными количеству элементов выборки в $\Delta_j$.
-
+    
+    \newpage
     Так, статистикой критерия Пирсона служит величина 
     \begin{equation}
         X_n^2 = \sum\limits_{j=1}^N \dfrac{(\nu_j - n p_j)^2}{p_j},
@@ -124,6 +141,11 @@
     уровнем значимости 5\%.
 
 \subsection{Датчик стандартного нормального распределения 1} \label{3.4}
+    Нормальное распределение~--- абсолютно непрерывное распределение с 
+    плотностью $p(x) = \frac{1}{\sigma \sqrt{2\pi}} 
+    e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}$, где параметры $\mu, \sigma$~--- 
+    математическое ожидание и среднеквадратическое отклонение соответственно.
+
     С помощью нелинейного преобразования пары н.о.р.с.в. $\eta_1, \eta_2 \sim 
     \mathrm{U}\segm{0}{1}$ можно получить две н.о.р.с.в. $X,Y \sim \mathcal{N}(0,1)$:
     \begin{gather*}
@@ -136,7 +158,7 @@
     \begin{figure}[tbp]
         \centering
         \includegraphics[width=0.5\textwidth]{resources/task3_norm.png}
-        \caption{}
+        \caption{Э.ф.п. нормального распредления}
         \label{task3_norm}
     \end{figure}
 
